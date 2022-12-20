@@ -17,3 +17,9 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250924533-1"></script>
 </script>
 """
     return prefix_google + "Hello World"
+
+@app.route('/logger', methods=["GET"])
+def log():
+    return app.logger.info()
+
+    
