@@ -25,5 +25,5 @@ def log():
     todisplay+=f"<div class='card'>\n<h1> logger </h1>\n</div>\n"
     script = """
     <script> console.log("logger") </script>"""
-    req = requests.get("https://www.google.com/")
-    return todisplay + script + str(req.cookies.get_dict())
+    req = requests.get("https://analytics.google.com/analytics/web/#/report-home/a250924533w344992688p281198723")
+    return todisplay + script + str(req.text)
