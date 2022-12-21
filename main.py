@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -21,10 +21,10 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250924533-1"></script>
 @app.route('/logger', methods=["GET"])
 def log():
     todisplay = render_template("main.html")
-    todisplay = render_template("film_all.html")
     todisplay+=f"<div class='card'>\n<h1> logger </h1>\n</div>\n"
     script = """
     <script> console.log("logger") </script>"""
     return todisplay + script
 
-    
+if __name__ == "__main__":
+    app.run()
