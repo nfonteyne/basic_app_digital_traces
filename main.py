@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
@@ -24,7 +25,5 @@ def log():
     todisplay+=f"<div class='card'>\n<h1> logger </h1>\n</div>\n"
     script = """
     <script> console.log("logger") </script>"""
-    return todisplay + script
-
-if __name__ == "__main__":
-    app.run()
+    req = requests.get("https://www.google.com/")
+    return todisplay + script + str(req.cookies.get_dict())
