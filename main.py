@@ -22,9 +22,9 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250924533-1"></script>
 def log():
     todisplay = render_template("main.html")
     todisplay = render_template("film_all.html")
-    todisplay+=f"<div class='card'>\n<h1> logger</h1>\n</div>\n"
+    todisplay+=f"<div class='card'>\n<h1> logger </h1>\n</div>\n"
     script = """
     <script> console.log("logger") </script>"""
-    return "I'm a logger" + script
+    return todisplay + script
 
     
