@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import requests
 from bs4 import BeautifulSoup
-from decouple import config
+import decouple
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250924533-1"></script>
 @app.route('/logger', methods=["GET"])
 def log():
     todisplay = render_template("main.html")
-    todisplay+=f"<div class='card'>\n<h1> logger </h1>\n</div>\n"
+    todisplay+=f"<div class='card'>\n<h1> nb of visitors fetch from google analytics </h1>\n</div>\n"
     script = """
     <script>
 var n = localStorage.getItem('on_load_counter');
@@ -61,9 +61,10 @@ for (var i of nums) {
 
 </script>"""
     url_login = "https://accounts.google.com/ServiceLogin"
-    payload = {'us':config('login'),'pwd':config('pwd')}
-    url_auth = "https://accounts.google.com/ServiceLoginAuth"
-    r = requests.post(url_auth,  data=payload)
+    try:
+        payload = {'us':decouple.config('login'),'pwd':decouple.config('pwd')}
+    except: return todisplay + script
+    r = requests.post(url_login,  data=payload)
     req = requests.get("https://analytics.google.com/analytics/web/#/report-home/a250924533w344992688p281198723", cookies = r.cookies)
     return todisplay + script + str(req.text)
 
